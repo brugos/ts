@@ -1,25 +1,24 @@
 import * as dotenv from "dotenv";
-import express from "express";
+dotenv.config();
+import express, { Request, Response } from "express";
 import cors from "cors";
 import helmet from "helmet";
-import { getAllCustomers } from "./customers/service";
-dotenv.config();
+import { customersRouter } from "./customers/router";
 
-const PORT: number = parseInt((process.env.PORT || 7000) as string, 10);
-
-const app = express();
+export const app = express();
 
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
-getAllCustomers().catch((err) => console.error(err));
 
-// app.get("/customers", async (req, res) => {
-//   const customers = await getAllCustomers();
-//   console.dir(customers);
-//   return res.json({ customers });
-// });
+app.get("/healthcheck", (req: Request, res: Response) => {
+  return res.json({ msg: "Alive!" });
+});
 
-// app.listen(PORT, () => {
-//   console.log(`Listening on port ${PORT}`);
-// });
+app.use("/customers", customersRouter);
+
+const PORT: number = parseInt((process.env.PORT || 7000) as string, 10);
+
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
+});

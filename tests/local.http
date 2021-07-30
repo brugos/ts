@@ -1,2 +1,11 @@
 @port = 7000
 GET http://localhost:{{port}}/customers
+###
+
+GET http://localhost:{{port}}/customers/ca48570d-6265-453a-b9da-ca9bc982bfee
+
+###
+GET http://localhost:{{port}}/customers/1
+
+###
+GET http://localhost:{{port}}/healthcheck

@@ -1,24 +1,18 @@
-import { knexInstance as db } from "../lib/knex";
+import { db } from "../lib/knex";
 import { ICustomer } from "./interface";
 
-// const db = knexInstance("customers");
+const fields = ["id", "email", "given_name", "family_name"];
+const table = db<ICustomer>("customers");
 
-export function createCustomer(customer: ICustomer) {
-  return db("customers").insert(customer);
-}
+export const getCustomers = () => table.select(fields);
 
-export async function getAllCustomers() {
-  const customers = await db<ICustomer>("customers").select(
-    "id, email, given_name, family_name"
-  );
-  console.log("customers", customers);
-  return customers;
-}
+export const getCustomer = (id: string) => table.select(fields).where("id", id);
 
-export function deleteCustomer(customer_id: ICustomer["id"]) {
-  return db("customers").where("id", customer_id).del();
-}
+export const createCustomer = (customer: ICustomer) =>
+  db("customers").insert(customer);
 
-function updateCustomer(customer_id: ICustomer["id"], customer: ICustomer) {
-  return db("customers").where("id", customer_id).update(customer_id);
-}
+export const deleteCustomer = (customer_id: ICustomer["id"]) =>
+  table.where("id", customer_id).del();
+
+export const updateCustomer = (id: ICustomer["id"], customer: ICustomer) =>
+  table.where("id", id).update(customer);
