@@ -9,3 +9,16 @@ GET http://localhost:{{port}}/customers/1
 
 ###
 GET http://localhost:{{port}}/healthcheck
+
+###
+POST http://localhost:7000/customers HTTP/1.1
+content-type: application/json
+
+{
+  "email": "test@test.com",
+  "given_name": "Given",
+  "family_name": "Family"
+}
+
+### 
+DELETE http://localhost:7000/customers/0d0905a1-f3f5-4f32-ae23-20cfbc895dac

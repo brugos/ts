@@ -2,16 +2,18 @@
 
 ## 1. Requirements
 
-We would like you to build a couple of api endpoints in Node.js to manage a set of customer orders held in an SQLite database.
+- Build a couple of api endpoints in Node.js to manage a set of customer orders held in an SQLite database.
+- Develop using typescript
+- A sample sqlite3 is located under `./data` folder.
+- The schema image is provided for reference below
+- Ideally endpoints that both read from and write to the database.
 
-Requirements:
+TODO:
 
-Be developed using typescript
-Use the data in the attached SQLite3 database file. (The schema image is provided for reference below)
-We don't expect a full api but ideally we would like endpoints that both read from and write to the database.
-We would like to see a good readme with instructions on how to run the application and suitable tests, how the application is delivered is up to you.
-
-We understand that 1-2 hours is not a lot of time to do this in so don't feel pressured to spend days on it. Consider what you would add if you had more time and we can discuss.
+- Adding more tests (one per route)
+- Mocking db response
+- db migrations
+- Centralise try/catch over the routes
 
 ## 2. Code Structure
 
@@ -23,3 +25,10 @@ The files follow the tree structure below:
     - router.ts
     - service.ts
 - lib (shared functions)
+
+## Instructions
+
+To run the application:
+
+- Get your sqlite db into ./data/customers.db
+- `yarn && yarn dev`
